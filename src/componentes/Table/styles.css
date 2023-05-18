@@ -1,0 +1,19 @@
+.table-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.table-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F5F5F5;
+    min-height: 100%;
+    margin-top: 16px;
+}
+
+.content-date strong {
+    margin-right: 4px;
+}

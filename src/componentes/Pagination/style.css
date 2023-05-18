@@ -1,0 +1,22 @@
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 18px;
+    padding: 0 70px 15px;
+    gap: 8px;
+    cursor: pointer;
+    color: #32323B;
+}
+
+.page-num {
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.active {
+    background-color: #B7005C;
+    color: #E5E5E5;
+    padding: 0 2px;
+}
