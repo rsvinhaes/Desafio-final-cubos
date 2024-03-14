@@ -14,12 +14,14 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
 import { useStyles } from './style';
 import './style.css';
+import useGlobalContext from '../../hooks/useGlobalContext';
 
 
 export default function PrimarySearchAppBar() {
 
     const navigate = useNavigate()
-    const classes = useStyles();
+    const classes = useStyles()
+    const { setToken } = useGlobalContext()
 
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -31,6 +33,11 @@ export default function PrimarySearchAppBar() {
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
+
+    const handleLogout = () => {
+        setToken('')
+        navigate('/')
+    }
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
@@ -54,6 +61,17 @@ export default function PrimarySearchAppBar() {
                     >
                         Usuário
                     </Button>
+
+                    <Button
+                                type="submit"
+                                variant="text"
+                                className={classes.icone}
+                                onClick={handleLogout}
+                                                               
+                            >
+                                sair
+                            </Button>
+
                 </div>
             </MenuItem>
 
@@ -94,8 +112,19 @@ export default function PrimarySearchAppBar() {
                                 className={classes.icone}
                                 startIcon={<AccountCircle />}
                                 onClick={() => navigate('/signIn')}
+                                
                             >
                                 Usuário
+                            </Button>
+
+                            <Button
+                                type="submit"
+                                variant="text"
+                                className={classes.icone}
+                                onClick={handleLogout}
+                                                               
+                            >
+                                sair
                             </Button>
                         </div>
 

@@ -5,9 +5,11 @@ import useGlobalContext from '../../hooks/useGlobalContext';
 import api from '../../services/api';
 import { useStyles } from './style';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function AddProduct() {
+    const navigate = useNavigate()
     const { token } = useGlobalContext()
     const classes = useStyles();
     const [file, setFile] = useState('')
@@ -34,6 +36,7 @@ function AddProduct() {
                 }
 
             });
+            navigate('/main')
             console.log(response.data)
 
         } catch (error) {

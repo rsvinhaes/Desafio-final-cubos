@@ -14,7 +14,7 @@ function Main() {
     const navigate = useNavigate()
     const classes = useStyles();
 
-    async function handleGetUserProduct() {
+   const handleGetUserProduct = async () => {
         try {
 
             const response = await api.get('/produto', {

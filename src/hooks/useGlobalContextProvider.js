@@ -8,7 +8,7 @@ function useGlobalContextProvider() {
     const [search, setSearch] = useState([])
     const [products, setProducts] = useState([])
     const [userProduct, setUserProduct] = useState([])
-
+    
 
     return {
         detailProduct,
@@ -24,7 +24,8 @@ function useGlobalContextProvider() {
         products,
         setProducts,
         userProduct,
-        setUserProduct
+        setUserProduct,
+                
     }
 }
 

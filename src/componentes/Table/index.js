@@ -3,17 +3,62 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Grid, Typography, CardMedia, IconButton } from '@material-ui/core';
 import Empty from '../../assets/empty.svg'
 import { useStyles } from './styles';
-
 import './styles.css';
 // import Confirm from '../Confirm';
 import { formatMoney } from '../../utils/formaters';
-// import { useState, useEffect } from 'react';
-// import api from '../../services/api';
+import { useEffect } from 'react';
+import api from '../../services/api';
 import useGlobalContext from '../../hooks/useGlobalContext';
 
+
 export default function Table() {
-    const { userProduct } = useGlobalContext()
+    const { userProduct, token, setUserProduct } = useGlobalContext()
     const classes = useStyles();
+   
+
+    async function handleDeleteproduct(id) {
+        try {
+
+            const response = await api.delete(`/produtos/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });    
+            console.log(response)
+            
+        } catch (error) {
+            const erro = error.response.data.mensagem
+            return alert(erro)
+        }
+        
+    }
+
+    const handleGetUserProduct = async () => {
+        try {
+
+            const response = await api.get('/produto', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setUserProduct(response.data)
+
+        } catch (error) {
+            const erro = error.response.data.mensagem
+            return alert(erro)
+        }
+    }
+
+    useEffect(() => {
+        handleGetUserProduct()
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+     [handleDeleteproduct])
+
+    // async function handleModalEdit(id) {
+    //     setModalEdit(true)
+    //     setEditId(id)
+    // }
+   
 
     return (
         <Grid className={classes.containerTable}>
@@ -77,12 +122,12 @@ export default function Table() {
 
                             <Grid item xs={1}>
                                 <IconButton
-                                // onClick={() => handleOpenEdit(transact)}
+                               
                                 >
                                     <EditIcon />
                                 </IconButton>
                                 <IconButton
-                                // onClick={() => handleOpenConfirm(transact)}
+                                onClick={() => handleDeleteproduct(product.id)}
                                 >
                                     <DeleteIcon />
                                 </IconButton>
